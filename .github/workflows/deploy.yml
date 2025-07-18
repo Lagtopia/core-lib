@@ -19,7 +19,30 @@ jobs:
           java-version: 17
           distribution: temurin
 
+      - name: Get current version from pom.xml
+        id: get_version
+        run: |
+          VERSION=$(xmllint --xpath "/*[local-name()='project']/*[local-name()='version']/text()" pom.xml)
+          echo "Detected version: $VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Check if version already exists on GitHub Packages
+        id: check_version
+        run: |
+          curl -s -H "Authorization: Bearer ${{ secrets.mvn_deploy }}" \
+            "https://maven.pkg.github.com/Lagtopia/core-lib/me/csdad/lagtopia/corelib/$VERSION/corelib-$VERSION.pom" \
+            -o /dev/null -w "%{http_code}" | tee status.txt
+
+          STATUS=$(cat status.txt)
+          if [[ "$STATUS" == "200" ]]; then
+            echo "Version $VERSION already exists. Skipping deployment."
+            echo "SKIP_DEPLOY=true" >> $GITHUB_ENV
+          else
+            echo "Version $VERSION does not exist. Proceeding to deploy."
+          fi
+
       - name: Deploy to GitHub Packages
+        if: env.SKIP_DEPLOY != 'true'
         run: mvn clean deploy --settings .github/settings.xml -X
         env:
           GITHUB_ACTOR: Lagtopia
