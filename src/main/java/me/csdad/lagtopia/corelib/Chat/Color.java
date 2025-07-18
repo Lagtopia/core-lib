@@ -24,4 +24,17 @@ public class Color {
     public static String strip(String message) {
         return ChatColor.stripColor(message);
     }
+
+    /**
+     * Method that will strip color codes from a string, and then convert the string to an array.
+     * Takes a specified regex split definition.
+     * @param message Message to split
+     * @param regex Regex to split on
+     * @return split message
+     */
+    public static String[] splice(String message, String regex) {
+
+        return strip(message).split(regex);
+
+    }
 }

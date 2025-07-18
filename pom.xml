@@ -6,7 +6,7 @@
 
   <groupId>me.csdad.lagtopia</groupId>
   <artifactId>corelib</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <name>CoreLib</name>
   <description>Core library component of Lagtopia's servers. Meant to create ease of access for essential utility methods</description>
   <url>https://github.com/Lagtopia/core-lib</url>

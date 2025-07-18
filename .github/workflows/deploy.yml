@@ -20,7 +20,7 @@ jobs:
           distribution: temurin
 
       - name: Deploy to GitHub Packages
-        run: mvn --batch-mode deploy --settings .github/settings.xml || echo "Deploy skipped (likely already published)"
+        run: mvn --batch-mode deploy --settings .github/settings.xml || echo "Deploy skipped (likely already published). Refer to message to ensure return code was 409."
         env:
           GITHUB_ACTOR: Lagtopia
           GITHUB_TOKEN: ${{ secrets.mvn_deploy }}
