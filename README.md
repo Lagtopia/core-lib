@@ -27,13 +27,13 @@ This project is automatically deployed and published to GitHub Packages, making 
 </repositories>
 ```
 
-### 2. Add CoreLib as a depdency to your `pom.xml`
+### 2. Add CoreLib as a dependency to your `pom.xml`
 ```xml
 <dependencies>
   <dependency>
     <groupId>me.csdad.lagtopia</groupId>
     <artifactId>corelib</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
   </dependency>
 </dependencies>
 ```
